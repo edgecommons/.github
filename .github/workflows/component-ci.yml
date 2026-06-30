@@ -42,6 +42,11 @@ on:
         required: false
         type: string
         default: "20"
+      rust-features:
+        description: "Cargo features to enable for the RUST build/test/clippy (added to the crate defaults)"
+        required: false
+        type: string
+        default: ""
 
 jobs:
   build-test:
@@ -106,11 +111,37 @@ jobs:
       # ----- RUST -----
       - if: inputs.language == 'RUST'
         uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy
       - if: inputs.language == 'RUST'
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: ${{ inputs.working-directory }}
+      # Components that depend on the private ggcommons via a git dependency
+      # (ggcommons = { git = "https://github.com/edgecommons/ggcommons.git", ... }) need a token to
+      # clone it. The repo GITHUB_TOKEN is repo-scoped and cannot read another private repo, so provide
+      # a read-only PAT as the org/repo Actions secret EDGECOMMONS_READ_TOKEN. The component's
+      # .cargo/config.toml must set net.git-fetch-with-cli = true so cargo honors this git auth.
+      - if: inputs.language == 'RUST'
+        name: Configure private git auth for ggcommons (if a token is provided)
+        env:
+          EDGECOMMONS_READ_TOKEN: ${{ secrets.EDGECOMMONS_READ_TOKEN }}
         run: |
-          cargo build --all-targets
-          cargo test
-          cargo clippy --all-targets -- -D warnings
+          if [ -n "$EDGECOMMONS_READ_TOKEN" ]; then
+            git config --global url."https://x-access-token:${EDGECOMMONS_READ_TOKEN}@github.com/".insteadOf "https://github.com/"
+            echo "configured private git auth for github.com"
+          else
+            echo "EDGECOMMONS_READ_TOKEN not set; private git-dep builds may fail"
+          fi
+      - if: inputs.language == 'RUST'
+        env:
+          RUST_FEATURES: ${{ inputs.rust-features }}
+        run: |
+          FEAT=""
+          if [ -n "$RUST_FEATURES" ]; then FEAT="--features $RUST_FEATURES"; fi
+          cargo build --all-targets $FEAT
+          cargo test $FEAT
+          cargo clippy --all-targets $FEAT -- -D warnings
 
       # ----- TYPESCRIPT -----
       - if: inputs.language == 'TYPESCRIPT'
