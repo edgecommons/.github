@@ -28,14 +28,24 @@ write only business logic and deploy the same component anywhere.
 
 ### 🔌 Components
 
+<!-- COMPONENTS:START — generated from edgecommons/registry by scripts/generate-profile.mjs; do not edit by hand -->
+
 **Adapters** — southbound, field-device & protocol ingestion
 
 | Component | Lang | Protocol | Platforms |
 |-----------|------|----------|-----------|
-| [**opcua-adapter**](https://github.com/edgecommons/opcua-adapter) | Java | OPC UA | Greengrass · Host · K8s |
 | [**modbus-adapter**](https://github.com/edgecommons/modbus-adapter) | Python | Modbus (TCP / RTU / RTU-over-TCP) | Greengrass · Host · K8s |
+| [**opcua-adapter**](https://github.com/edgecommons/opcua-adapter) | Java | OPC UA | Greengrass · Host · K8s |
 
-*Processors (edge compute) and sinks (northbound) — coming soon.*
+**Processors** — edge compute & stream processing
+
+| Component | Lang | Platforms |
+|-----------|------|-----------|
+| [**telemetry-processor**](https://github.com/edgecommons/telemetry-processor) | Rust | Greengrass · Host · K8s |
+
+*Sinks (northbound delivery) — coming soon.*
+
+<!-- COMPONENTS:END -->
 
 ### 🚀 Get started
 
