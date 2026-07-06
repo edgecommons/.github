@@ -76,6 +76,16 @@ jobs:
       # back to the repo GITHUB_TOKEN, which works only if you instead add this repo to the
       # package's "Manage Actions access" list in the UI (no REST API exists for that).
       - if: inputs.language == 'JAVA'
+        name: Checkout core library until the GitHub Packages path is published
+        uses: actions/checkout@v4
+        with:
+          repository: edgecommons/ggcommons
+          token: ${{ secrets.EDGECOMMONS_READ_TOKEN || secrets.GITHUB_TOKEN }}
+          path: .edgecommons-core
+      - if: inputs.language == 'JAVA'
+        name: Install core Java library into local Maven cache
+        run: mvn -B -DskipTests "-Djacoco.skip=true" -f "$GITHUB_WORKSPACE/.edgecommons-core/libs/java/pom.xml" install
+      - if: inputs.language == 'JAVA'
         run: mvn -B verify
         env:
           MAVEN_USERNAME: ${{ github.actor }}
@@ -146,6 +156,7 @@ jobs:
       - if: inputs.language == 'RUST'
         env:
           RUST_FEATURES: ${{ inputs.rust-features }}
+          CARGO_NET_GIT_FETCH_WITH_CLI: "true"
         run: |
           FEAT=""
           if [ -n "$RUST_FEATURES" ]; then FEAT="--features $RUST_FEATURES"; fi
