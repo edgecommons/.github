@@ -21,17 +21,33 @@ jobs:
     steps:
       - name: Checkout .github
         uses: actions/checkout@v4
+      - name: Check registry checkout token
+        id: registry-token
+        env:
+          PROFILE_SYNC_TOKEN: ${{ secrets.EDGECOMMONS_PROFILE_SYNC_TOKEN }}
+        run: |
+          if [ -z "$PROFILE_SYNC_TOKEN" ]; then
+            echo "available=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::Skipping profile sync: edgecommons/registry is private and EDGECOMMONS_PROFILE_SYNC_TOKEN is not configured."
+          else
+            echo "available=true" >> "$GITHUB_OUTPUT"
+          fi
       - name: Checkout registry (source of truth)
+        if: steps.registry-token.outputs.available == 'true'
         uses: actions/checkout@v4
         with:
           repository: edgecommons/registry
           path: registry
+          token: ${{ secrets.EDGECOMMONS_PROFILE_SYNC_TOKEN }}
       - uses: actions/setup-node@v4
+        if: steps.registry-token.outputs.available == 'true'
         with:
-          node-version: 20
+          node-version: 24
       - name: Regenerate the component tables
+        if: steps.registry-token.outputs.available == 'true'
         run: node scripts/generate-profile.mjs registry/components.json profile/README.md
       - name: Commit if the landing page changed
+        if: steps.registry-token.outputs.available == 'true'
         run: |
           if git diff --quiet -- profile/README.md; then
             echo "profile/README.md already in sync with the registry"
