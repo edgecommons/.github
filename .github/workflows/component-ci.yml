@@ -97,6 +97,11 @@ jobs:
           EDGECOMMONS_READ_TOKEN: ${{ secrets.EDGECOMMONS_READ_TOKEN }}
         run: |
           if [ -n "$EDGECOMMONS_READ_TOKEN" ]; then
+            # Temporary compatibility while the private core repo is still hosted at
+            # edgecommons/ggcommons even though manifests use the rebranded
+            # edgecommons/edgecommons URL.
+            git config --global url."https://x-access-token:${EDGECOMMONS_READ_TOKEN}@github.com/edgecommons/ggcommons.git".insteadOf "https://github.com/edgecommons/edgecommons.git"
+            git config --global url."https://x-access-token:${EDGECOMMONS_READ_TOKEN}@github.com/edgecommons/ggcommons".insteadOf "https://github.com/edgecommons/edgecommons"
             git config --global url."https://x-access-token:${EDGECOMMONS_READ_TOKEN}@github.com/".insteadOf "https://github.com/"
             echo "configured private git auth for github.com"
           else
@@ -128,6 +133,11 @@ jobs:
           EDGECOMMONS_READ_TOKEN: ${{ secrets.EDGECOMMONS_READ_TOKEN }}
         run: |
           if [ -n "$EDGECOMMONS_READ_TOKEN" ]; then
+            # Temporary compatibility while the private core repo is still hosted at
+            # edgecommons/ggcommons even though manifests use the rebranded
+            # edgecommons/edgecommons URL.
+            git config --global url."https://x-access-token:${EDGECOMMONS_READ_TOKEN}@github.com/edgecommons/ggcommons.git".insteadOf "https://github.com/edgecommons/edgecommons.git"
+            git config --global url."https://x-access-token:${EDGECOMMONS_READ_TOKEN}@github.com/edgecommons/ggcommons".insteadOf "https://github.com/edgecommons/edgecommons"
             git config --global url."https://x-access-token:${EDGECOMMONS_READ_TOKEN}@github.com/".insteadOf "https://github.com/"
             echo "configured private git auth for github.com"
           else
