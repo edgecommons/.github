@@ -13,13 +13,17 @@ const registryPath = process.argv[2] || "registry/components.json";
 const readmePath = process.argv[3] || "profile/README.md";
 
 const LANG = { JAVA: "Java", PYTHON: "Python", RUST: "Rust", TYPESCRIPT: "TypeScript" };
-const PLAT = { GREENGRASS: "Greengrass", HOST: "Host", KUBERNETES: "K8s" };
+const PLAT = { GREENGRASS: "Greengrass", HOST: "Host", KUBERNETES: "Kubernetes" };
+const STATUS = { beta: "Beta", experimental: "Experimental", stable: "Stable" };
 
 // Ordered category sections. `protocol: true` renders a Protocol column (adapters).
 const SECTIONS = [
-  { key: "adapter", label: "Adapters", blurb: "southbound, field-device & protocol ingestion", protocol: true },
-  { key: "processor", label: "Processors", blurb: "edge compute & stream processing", protocol: false },
+  { key: "adapter", label: "Adapters", blurb: "southbound protocol ingestion", protocol: true },
+  { key: "processor", label: "Processors", blurb: "edge compute and stream processing", protocol: false },
   { key: "sink", label: "Sinks", blurb: "northbound delivery", protocol: false },
+  { key: "bridge", label: "Bridges", blurb: "site bus and namespace integration", protocol: false },
+  { key: "service", label: "Services", blurb: "shared edge runtime services", protocol: false },
+  { key: "console", label: "Consoles", blurb: "edge operations and visibility", protocol: false },
 ];
 
 const START =
@@ -29,19 +33,20 @@ const END = "<!-- COMPONENTS:END -->";
 const lang = (c) => LANG[c.language] || c.language;
 const plats = (c) => (c.platforms || []).map((p) => PLAT[p] || p).join(" · ") || "—";
 const link = (c) => `[**${c.name}**](https://github.com/${c.repo})`;
+const status = (c) => STATUS[c.status] || c.status || "—";
 const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
 function section(sec, comps) {
   const rows = comps.filter((c) => c.category === sec.key).sort((a, b) => a.name.localeCompare(b.name));
   if (rows.length === 0) return `*${sec.label} (${sec.blurb}) — coming soon.*`;
   const head = sec.protocol
-    ? "| Component | Lang | Protocol | Platforms |\n|-----------|------|----------|-----------|"
-    : "| Component | Lang | Platforms |\n|-----------|------|-----------|";
+    ? "| Component | Language | Protocol | Status | Deployment targets |\n|-----------|----------|----------|--------|--------------------|"
+    : "| Component | Language | Status | Deployment targets |\n|-----------|----------|--------|--------------------|";
   const body = rows
     .map((c) =>
       sec.protocol
-        ? `| ${link(c)} | ${lang(c)} | ${c.protocol || "—"} | ${plats(c)} |`
-        : `| ${link(c)} | ${lang(c)} | ${plats(c)} |`,
+        ? `| ${link(c)} | ${lang(c)} | ${c.protocol || "—"} | ${status(c)} | ${plats(c)} |`
+        : `| ${link(c)} | ${lang(c)} | ${status(c)} | ${plats(c)} |`,
     )
     .join("\n");
   return `**${sec.label}** — ${sec.blurb}\n\n${head}\n${body}`;
