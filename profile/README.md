@@ -61,6 +61,7 @@ Each target keeps its native lifecycle, packaging, operations model, and platfor
 
 | Component | Language | Protocol | Status | Deployment targets |
 |-----------|----------|----------|--------|--------------------|
+| [**camera-adapter**](https://github.com/edgecommons/camera-adapter) | Rust | ONVIF / RTSP / GenICam | Experimental | Greengrass · Host · Kubernetes |
 | [**modbus-adapter**](https://github.com/edgecommons/modbus-adapter) | Python | Modbus (TCP / RTU / RTU-over-TCP) | Beta | Greengrass · Host · Kubernetes |
 | [**opcua-adapter**](https://github.com/edgecommons/opcua-adapter) | Java | OPC UA | Beta | Greengrass · Host · Kubernetes |
 
@@ -92,7 +93,7 @@ Each target keeps its native lifecycle, packaging, operations model, and platfor
 
 | Component | Language | Status | Deployment targets |
 |-----------|----------|--------|--------------------|
-| [**edge-console**](https://github.com/edgecommons/edge-console) | TypeScript | Experimental | Host · Kubernetes |
+| [**edge-console**](https://github.com/edgecommons/edge-console) | Rust | Experimental | Host · Kubernetes |
 
 <!-- COMPONENTS:END -->
 
