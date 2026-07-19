@@ -100,7 +100,7 @@ Each target keeps its native lifecycle, packaging, operations model, and platfor
 
 | Component | Language | Status | Deployment targets |
 |-----------|----------|--------|--------------------|
-| [**uns-cmd**](https://github.com/edgecommons/uns-cmd) | Rust | Experimental | Host |
+| [**ec-uns-cmd**](https://github.com/edgecommons/ec-uns-cmd) | Rust | Experimental | Host |
 
 <!-- COMPONENTS:END -->
 
