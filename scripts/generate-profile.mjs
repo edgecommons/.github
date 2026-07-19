@@ -24,6 +24,7 @@ const SECTIONS = [
   { key: "bridge", label: "Bridges", blurb: "site bus and namespace integration", protocol: false },
   { key: "service", label: "Services", blurb: "shared edge runtime services", protocol: false },
   { key: "console", label: "Consoles", blurb: "edge operations and visibility", protocol: false },
+  { key: "tool", label: "Tools", blurb: "developer & operations utilities", protocol: false },
 ];
 
 const START =
