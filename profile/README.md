@@ -98,10 +98,10 @@ Each target keeps its native lifecycle, packaging, operations model, and platfor
 
 **Tools** — developer & operations utilities
 
-| Component | Language | Status | Deployment targets |
-|-----------|----------|--------|--------------------|
-| [**ec-secrets**](https://github.com/edgecommons/ec-secrets) | Rust | Experimental | Host |
-| [**ec-uns-cmd**](https://github.com/edgecommons/ec-uns-cmd) | Rust | Experimental | Host |
+| Tool | Language | Status |
+|------|----------|--------|
+| [**ec-secrets**](https://github.com/edgecommons/ec-secrets) | Rust | Experimental |
+| [**ec-uns-cmd**](https://github.com/edgecommons/ec-uns-cmd) | Rust | Experimental |
 
 <!-- COMPONENTS:END -->
 
