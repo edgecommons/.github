@@ -24,7 +24,9 @@ const SECTIONS = [
   { key: "bridge", label: "Bridges", blurb: "site bus and namespace integration", protocol: false },
   { key: "service", label: "Services", blurb: "shared edge runtime services", protocol: false },
   { key: "console", label: "Consoles", blurb: "edge operations and visibility", protocol: false },
-  { key: "tool", label: "Tools", blurb: "developer & operations utilities", protocol: false },
+  // Tools are run from a shell, not deployed to a device, so `tool: true` renders them
+  // without the deployment-targets column (see section()).
+  { key: "tool", label: "Tools", blurb: "developer & operations utilities", protocol: false, tool: true },
 ];
 
 const START =
@@ -40,14 +42,20 @@ const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 function section(sec, comps) {
   const rows = comps.filter((c) => c.category === sec.key).sort((a, b) => a.name.localeCompare(b.name));
   if (rows.length === 0) return `*${sec.label} (${sec.blurb}) — coming soon.*`;
-  const head = sec.protocol
-    ? "| Component | Language | Protocol | Status | Deployment targets |\n|-----------|----------|----------|--------|--------------------|"
-    : "| Component | Language | Status | Deployment targets |\n|-----------|----------|--------|--------------------|";
+  // A tool is run from a shell, not deployed to a device, so its table drops the
+  // deployment-targets column rather than implying one.
+  const head = sec.tool
+    ? "| Tool | Language | Status |\n|------|----------|--------|"
+    : sec.protocol
+      ? "| Component | Language | Protocol | Status | Deployment targets |\n|-----------|----------|----------|--------|--------------------|"
+      : "| Component | Language | Status | Deployment targets |\n|-----------|----------|--------|--------------------|";
   const body = rows
     .map((c) =>
-      sec.protocol
-        ? `| ${link(c)} | ${lang(c)} | ${c.protocol || "—"} | ${status(c)} | ${plats(c)} |`
-        : `| ${link(c)} | ${lang(c)} | ${status(c)} | ${plats(c)} |`,
+      sec.tool
+        ? `| ${link(c)} | ${lang(c)} | ${status(c)} |`
+        : sec.protocol
+          ? `| ${link(c)} | ${lang(c)} | ${c.protocol || "—"} | ${status(c)} | ${plats(c)} |`
+          : `| ${link(c)} | ${lang(c)} | ${status(c)} | ${plats(c)} |`,
     )
     .join("\n");
   return `**${sec.label}** — ${sec.blurb}\n\n${head}\n${body}`;
