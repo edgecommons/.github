@@ -102,6 +102,7 @@ Each target keeps its native lifecycle, packaging, operations model, and platfor
 |------|----------|--------|
 | [**ec-secrets**](https://github.com/edgecommons/ec-secrets) | Rust | Experimental |
 | [**ec-uns-cmd**](https://github.com/edgecommons/ec-uns-cmd) | Rust | Experimental |
+| [**edgecommons**](https://github.com/edgecommons/edgecommons) | Rust | Beta |
 
 <!-- COMPONENTS:END -->
 
