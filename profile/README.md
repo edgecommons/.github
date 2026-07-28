@@ -64,6 +64,7 @@ Each target keeps its native lifecycle, packaging, operations model, and platfor
 | [**camera-adapter**](https://github.com/edgecommons/camera-adapter) | Rust | ONVIF / RTSP / GenICam | Experimental | Greengrass · Host · Kubernetes |
 | [**ethernet-ip-adapter**](https://github.com/edgecommons/ethernet-ip-adapter) | Rust | EtherNet/IP (Allen-Bradley CIP; explicit polling + class-1 implicit I/O) | Experimental | Greengrass · Host · Kubernetes |
 | [**modbus-adapter**](https://github.com/edgecommons/modbus-adapter) | Python | Modbus (TCP / RTU / RTU-over-TCP) | Beta | Greengrass · Host · Kubernetes |
+| [**mtconnect-adapter**](https://github.com/edgecommons/mtconnect-adapter) | Rust | MTConnect (HTTP/XML; streaming + polling) | Experimental | Greengrass · Host · Kubernetes |
 | [**opcua-adapter**](https://github.com/edgecommons/opcua-adapter) | Java | OPC UA | Beta | Greengrass · Host · Kubernetes |
 
 **Processors** — edge compute and stream processing
