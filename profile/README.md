@@ -61,48 +61,48 @@ Each target keeps its native lifecycle, packaging, operations model, and platfor
 
 | Component | Language | Protocol | Status | Deployment targets |
 |-----------|----------|----------|--------|--------------------|
-| [**camera-adapter**](https://github.com/edgecommons/camera-adapter) | Rust | ONVIF / RTSP / GenICam | Experimental | Greengrass · Host · Kubernetes |
-| [**ethernet-ip-adapter**](https://github.com/edgecommons/ethernet-ip-adapter) | Rust | EtherNet/IP (Allen-Bradley CIP; explicit polling + class-1 implicit I/O) | Experimental | Greengrass · Host · Kubernetes |
+| [**camera-adapter**](https://github.com/edgecommons/camera-adapter) | Rust | ONVIF / RTSP / GenICam | Beta | Greengrass · Host · Kubernetes |
+| [**ethernet-ip-adapter**](https://github.com/edgecommons/ethernet-ip-adapter) | Rust | EtherNet/IP (Allen-Bradley CIP; explicit polling + class-1 implicit I/O) | Beta | Greengrass · Host · Kubernetes |
 | [**modbus-adapter**](https://github.com/edgecommons/modbus-adapter) | Python | Modbus (TCP / RTU / RTU-over-TCP) | Beta | Greengrass · Host · Kubernetes |
-| [**mtconnect-adapter**](https://github.com/edgecommons/mtconnect-adapter) | Rust | MTConnect (HTTP/XML; streaming + polling) | Experimental | Greengrass · Host · Kubernetes |
+| [**mtconnect-adapter**](https://github.com/edgecommons/mtconnect-adapter) | Rust | MTConnect (HTTP/XML; streaming + polling) | Beta | Greengrass · Host · Kubernetes |
 | [**opcua-adapter**](https://github.com/edgecommons/opcua-adapter) | Java | OPC UA | Beta | Greengrass · Host · Kubernetes |
 
 **Processors** — edge compute and stream processing
 
 | Component | Language | Status | Deployment targets |
 |-----------|----------|--------|--------------------|
-| [**telemetry-processor**](https://github.com/edgecommons/telemetry-processor) | Rust | Experimental | Greengrass · Host · Kubernetes |
+| [**telemetry-processor**](https://github.com/edgecommons/telemetry-processor) | Rust | Beta | Greengrass · Host · Kubernetes |
 
 **Sinks** — northbound delivery
 
 | Component | Language | Status | Deployment targets |
 |-----------|----------|--------|--------------------|
-| [**file-replicator**](https://github.com/edgecommons/file-replicator) | Rust | Experimental | Greengrass · Host · Kubernetes |
+| [**file-replicator**](https://github.com/edgecommons/file-replicator) | Rust | Beta | Greengrass · Host · Kubernetes |
 
 **Bridges** — site bus and namespace integration
 
 | Component | Language | Status | Deployment targets |
 |-----------|----------|--------|--------------------|
-| [**uns-bridge**](https://github.com/edgecommons/uns-bridge) | Rust | Experimental | Host · Kubernetes |
+| [**uns-bridge**](https://github.com/edgecommons/uns-bridge) | Rust | Beta | Host · Kubernetes |
 
 **Services** — shared edge runtime services
 
 | Component | Language | Status | Deployment targets |
 |-----------|----------|--------|--------------------|
-| [**config-component**](https://github.com/edgecommons/config-component) | Rust | Experimental | Greengrass · Host · Kubernetes |
+| [**config-component**](https://github.com/edgecommons/config-component) | Rust | Beta | Greengrass · Host · Kubernetes |
 
 **Consoles** — edge operations and visibility
 
 | Component | Language | Status | Deployment targets |
 |-----------|----------|--------|--------------------|
-| [**edge-console**](https://github.com/edgecommons/edge-console) | Rust | Experimental | Host · Kubernetes |
+| [**edge-console**](https://github.com/edgecommons/edge-console) | Rust | Beta | Host · Kubernetes |
 
 **Tools** — developer & operations utilities
 
 | Tool | Language | Status |
 |------|----------|--------|
-| [**ec-secrets**](https://github.com/edgecommons/ec-secrets) | Rust | Experimental |
-| [**ec-uns-cmd**](https://github.com/edgecommons/ec-uns-cmd) | Rust | Experimental |
+| [**ec-secrets**](https://github.com/edgecommons/ec-secrets) | Rust | Beta |
+| [**ec-uns-cmd**](https://github.com/edgecommons/ec-uns-cmd) | Rust | Beta |
 | [**edgecommons**](https://github.com/edgecommons/edgecommons) | Rust | Beta |
 
 <!-- COMPONENTS:END -->
