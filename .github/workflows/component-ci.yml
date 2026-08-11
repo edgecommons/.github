@@ -47,6 +47,17 @@ on:
         required: false
         type: string
         default: ""
+      locked:
+        description: >-
+          RUST only: add --locked to the build/test/clippy commands, so the committed Cargo.lock is
+          a hard constraint rather than a starting suggestion. A component whose lock cannot satisfy
+          its manifests then fails fast with a lock diagnostic, instead of silently re-resolving and
+          testing a dependency set nobody committed. OPT-IN (default false): enabling it for every
+          caller at once would break any repo whose committed lock is stale or was generated with a
+          local [patch] override active, so each component adopts it once its own lock is known good.
+        required: false
+        type: boolean
+        default: false
 
 jobs:
   build-test:
@@ -150,13 +161,18 @@ jobs:
       - if: inputs.language == 'RUST'
         env:
           RUST_FEATURES: ${{ inputs.rust-features }}
+          RUST_LOCKED: ${{ inputs.locked }}
           CARGO_NET_GIT_FETCH_WITH_CLI: "true"
+        # $LOCKED is unquoted on purpose: when the input is false it is the empty string and word
+        # splitting drops it, so the argv is exactly what it was before this input existed.
         run: |
           FEAT=""
           if [ -n "$RUST_FEATURES" ]; then FEAT="--features $RUST_FEATURES"; fi
-          cargo build --all-targets $FEAT
-          cargo test $FEAT
-          cargo clippy --all-targets $FEAT -- -D warnings
+          LOCKED=""
+          if [ "$RUST_LOCKED" = "true" ]; then LOCKED="--locked"; fi
+          cargo build --all-targets $FEAT $LOCKED
+          cargo test $FEAT $LOCKED
+          cargo clippy --all-targets $FEAT $LOCKED -- -D warnings
 
       # ----- TYPESCRIPT -----
       - if: inputs.language == 'TYPESCRIPT'
