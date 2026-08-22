@@ -111,8 +111,8 @@ Each target keeps its native lifecycle, packaging, operations model, and platfor
 
 ```bash
 pipx install edgecommons
-edgecommons list-components
-edgecommons create-component -n com.example.MyAdapter -l PYTHON
+edgecommons registry list
+edgecommons component new -n com.example.MyAdapter -l PYTHON -k protocol-adapter
 ```
 
 Read the full docs at [docs.edgecommons.mbreissi.com](https://docs.edgecommons.mbreissi.com).
