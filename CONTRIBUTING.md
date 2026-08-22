@@ -5,7 +5,7 @@ Thanks for contributing! This applies to every repo in the org unless a repo ove
 ## Building a new component
 
 1. **Scaffold** with the CLI:
-   `edgecommons create-component -n com.example.MyAdapter -l <JAVA|PYTHON|RUST|TYPESCRIPT>`.
+   `edgecommons component new -n com.example.MyAdapter -l <JAVA|PYTHON|RUST|TYPESCRIPT> -k <service|protocol-adapter|processor|sink>`.
 2. **Name** the repo flat and lowercase by what it does — `opcua-adapter`, `s7-adapter`,
    `rollup-processor`, `kafka-sink`. No `edgecommons-` prefix (the org namespaces it).
 3. **Wire CI** by calling the reusable workflow:
