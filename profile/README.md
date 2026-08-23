@@ -71,6 +71,7 @@ Each target keeps its native lifecycle, packaging, operations model, and platfor
 
 | Component | Language | Status | Deployment targets |
 |-----------|----------|--------|--------------------|
+| [**image-processor**](https://github.com/edgecommons/image-processor) | Python | Experimental | Greengrass · Host · Kubernetes |
 | [**telemetry-processor**](https://github.com/edgecommons/telemetry-processor) | Rust | Beta | Greengrass · Host · Kubernetes |
 
 **Sinks** — northbound delivery
