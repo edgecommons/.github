@@ -22,7 +22,7 @@
 <p align="center">
   <img alt="Languages: Java, Python, Rust, TypeScript" src="https://img.shields.io/badge/languages-Java%20%7C%20Python%20%7C%20Rust%20%7C%20TypeScript-3F407A">
   <img alt="Deployment targets: Greengrass, Host, Kubernetes" src="https://img.shields.io/badge/targets-Greengrass%20%7C%20Host%20%7C%20Kubernetes-6F7FBD">
-  <img alt="License: Apache 2.0" src="https://img.shields.io/badge/license-Apache--2.0-AFC7C8">
+  <img alt="Core license: BUSL-1.1" src="https://img.shields.io/badge/core_license-BUSL--1.1-AFC7C8">
 </p>
 
 <p align="center">
@@ -84,7 +84,7 @@ Each target keeps its native lifecycle, packaging, operations model, and platfor
 
 | Component | Language | Status | Deployment targets |
 |-----------|----------|--------|--------------------|
-| [**uns-bridge**](https://github.com/edgecommons/uns-bridge) | Rust | Beta | Host · Kubernetes |
+| [**uns-bridge**](https://github.com/edgecommons/uns-bridge) | Rust | Beta | Greengrass · Host · Kubernetes |
 
 **Services** — shared edge runtime services
 
@@ -96,7 +96,7 @@ Each target keeps its native lifecycle, packaging, operations model, and platfor
 
 | Component | Language | Status | Deployment targets |
 |-----------|----------|--------|--------------------|
-| [**edge-console**](https://github.com/edgecommons/edge-console) | Rust | Beta | Host · Kubernetes |
+| [**edge-console**](https://github.com/edgecommons/edge-console) | Rust | Beta | Greengrass · Host · Kubernetes |
 
 **Tools** — developer & operations utilities
 
@@ -111,10 +111,14 @@ Each target keeps its native lifecycle, packaging, operations model, and platfor
 ## Get started
 
 ```bash
-pipx install edgecommons
+git clone https://github.com/edgecommons/edgecommons.git
+cd edgecommons
+cargo install --path cli/crates/ec-cli --locked
 edgecommons registry list
 edgecommons component new -n com.example.MyAdapter -l PYTHON -k protocol-adapter
 ```
 
 Read the full docs at [docs.edgecommons.mbreissi.com](https://docs.edgecommons.mbreissi.com).
+The current CLI is Rust; building it from source requires a Rust toolchain. Its source-install path
+is authoritative while standalone CLI release packaging remains unfinished.
 Building a component? Start with the org [contributing guide](https://github.com/edgecommons/.github/blob/main/CONTRIBUTING.md).
