@@ -25,7 +25,13 @@ Thanks for contributing! This applies to every repo in the org unless a repo ove
 ## Standards
 
 - Components build on `edgecommons` and follow its conventions (builders, the standard CLI contract,
-  the message envelope). Adapters follow the southbound contract (`docs/SOUTHBOUND.md`).
+  the protobuf message envelope). Adapters follow the
+  [southbound contract](https://github.com/edgecommons/edgecommons/blob/main/docs/SOUTHBOUND.md).
+- Label complete JSON message examples as human-readable projections of protobuf. Configuration JSON,
+  command argument objects and browser protocols retain their own encoding contracts.
+- Update status/reference docs with code changes. Distinguish implementation on main, pending branches
+  and dated validation evidence. Preserve accepted designs when recording incomplete work.
+- Use current files and Git history; CodeGraph and Graphify are disabled in the org workspace.
 - Tests required; keep CI green before requesting review.
 - Match the surrounding code style of the language/library.
 
